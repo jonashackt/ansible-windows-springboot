@@ -11,6 +11,11 @@ Ansible nutzt für die Connectivity mit Windows kein ssh, da dies auf Windows ni
 Management) - siehe http://www.it-visions.de/glossar/alle/4418/Windows_Remote_Management_WinRM.aspx
 
 
+## Prerequisites
+
+We need a Windows box to do show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10
+
+
 ## Setup
 
 Doku: http://docs.ansible.com/ansible/intro_windows.html#windows-system-prep
@@ -60,8 +65,8 @@ user@macbook:/yourPathHere/ansibleproject$ ansible yourPlayBookNameWithOutDotYml
 
 ## Best practices
 
-* __ALWAYS--: escape \ in paths with "\" --> e.g. C:\\temp
-* don´t that a path with C:\ProgamFiles (x86)\XYZ will work (e.g. for Java better use "C:\\ProgramData\\Oracle\\Java\\javapath\\java.exe")
+* __ALWAYS__: escape \ in paths with "\" --> e.g. C:\\\temp
+* don´t assume that a path with C:\ProgamFiles (x86)\XYZ will work (e.g. for Java better use "C:\\\ProgramData\\\Oracle\\\Java\\\javapath\\\java.exe")
 * if chocolatey doesn´t want to work, you have to install it once manually on your Windows box
 ```
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
