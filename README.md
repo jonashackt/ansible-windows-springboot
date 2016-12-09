@@ -53,6 +53,15 @@ Run
 Download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it from Powershell (with Admin rights).
 
 
+## Choose an Spring Boot app to deploy
+
+This is the easy task - we want to deploy a Spring Boot app. So just fire up one in Minutes e.g. with [Spring Initializr](http://start.spring.io/), choose an existing one you have ready to build or just take the simple project here: https://github.com/jonashackt/restexamples
+
+Either way you choose: Be sure to have a working Build in Place, so that you have a runnable Spring Boot jar-File in place (e.g. restexamples-0.0.1-SNAPSHOT.jar). For the example project [restexamples](https://github.com/jonashackt/restexamples) you get this by running:
+```
+mvn clean package
+```
+
 #### Testdrive Ansible connectivity
 ```
 ansible yourPlayBookNameWithOutDotYml -i hostsfile -m win_ping
