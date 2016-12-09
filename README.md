@@ -54,6 +54,7 @@ Download the Script https://github.com/ansible/ansible/blob/devel/examples/scrip
 
 #### Testdrive Ansible connectivity
 ```
+cd spring-boot-playbook
 ansible restexample-windows-dev -i hostsfile -m win_ping
 ```
 
