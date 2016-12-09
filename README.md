@@ -58,7 +58,7 @@ If __get-host__ shows something < 3.0, you should upgrade with https://github.co
 
 Run
 ```
-powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1')"
+powershell -nop -c -NoProfile -ExecutionPolicy unrestricted -Command "iex (new-object net.webclient).DownloadString('https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1')"
 ```
 
 or if this doesn´t work, download the Script manually (https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1) and run it from Powershell (with Admin rights).
