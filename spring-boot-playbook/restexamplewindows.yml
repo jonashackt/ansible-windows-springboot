@@ -1,0 +1,61 @@
+---
+- hosts: "{{host}}"
+  vars:
+    restexample_path: "C:\\spring-boot\\restexample"
+    jre_version: "8u111-windows-x64"
+    jre_incl_version: "jre-{{jre_version}}"
+    jre_zip_name: "{{jre_incl_version}}.zip"
+    jre_path: "{{restexample_path}}\\{{jre_incl_version}}\\bin\\java.exe"
+
+  tasks:
+  # Preperation steps
+  - name: Create directory C:\spring-boot\restexample, if not there
+    win_file: path={{restexample_path}} state=directory
+
+  - name: Get the Java Runtime Environment (JRE) 8 from XYZ
+    win_get_url:
+      url: "http://bla.com/{{jre_zip_name}}"
+      dest: "{{restexample_path}}\\{{jre_zip_name}}"
+
+  - name: Copy restexample jar-File to directory C:\spring-boot\restexample
+    win_copy:
+      src: "{{service_jar}}"
+      dest: "{{restexample_path}}\\{{service_name}}.jar"
+
+  - name: Install nssm (non-sucking service manager) via chocolatey
+    win_chocolatey:
+      name: nssm
+
+  # Stopp the services
+  - name: Stopp restexample-service, if there - so we can extract the JRE without Windows file handle problems
+    win_service:
+      name: "{{service_name}}"
+      state: stopped
+    ignore_errors: yes
+
+  # Extraction and copying of all necessary files
+  - name: Extracting Java Runtime Environment-Zip-File into C:\spring-boot\restexample\jre-X.Y.Z
+    win_unzip:
+      src: "{{restexample_path}}\\{{jre_zip_name}}"
+      dest: "{{restexample_path}}"
+      rm: true
+
+  # Service installation (stopping and configuration of Application directory is only done for demontration purposes - for apps that need certain .dlls on the path for example)
+  - name: Install restexample Spring Boot app as Windows service (via nssm), if not already there - but remain stopped to configure Application directory
+    win_nssm:
+      name: "{{service_name}}"
+      application: "{{jre_path}}"
+      app_parameters:
+          "-jar": "{{restexample_path}}\\{{service_name}}.jar"
+      state: stopped
+
+# If you need to have certain .exe or .dll files on the path where your Spring Boot .jar is located, you can configure the nssm Application Directory to that path
+# this is currently not supported by the ansible win_nssm module http://docs.ansible.com/ansible/win_nssm_module.html, so we have to use raw component
+# After that we have to (re-) start our nssm service to bring the configuration change to life
+  - name: Set the Application path for the restexample-service to the folder where the needed native libraries reside
+    raw: nssm set {{service_name}} AppDirectory {{restexample_path}}
+
+  - name: Finally fire up our restexample-application
+    win_service:
+      name: "{{service_name}}"
+      state: restarted
