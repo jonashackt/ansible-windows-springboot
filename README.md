@@ -13,10 +13,23 @@ Management) - siehe http://www.it-visions.de/glossar/alle/4418/Windows_Remote_Ma
 
 ## Prerequisites
 
-We need a Windows box to do show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10
+We need a Windows box to do show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10 (e.g. for VirtualBox - be sure to have the VM-Provider installed). You should get something like a MSEdge.Win10_RS1.Vagrant.zip - extract it (Mac: with the [Unarchiver](http://wakaba.c3.cx/s/apps/unarchiver.html)) and there you are: The Windows Vagrant box __dev-msedge.box__ is ready :)
+
+Because Microsoft doesn´t seem to ship metadata for the box, add it to Vagrant via:
+
+```
+vagrant box add dev-msedge.box --name "windows10"
+```
+
+I added a Vagrantfile to this repository, so you can start right away by (if you have Vagrant installed ;) )
+```
+vagrant up
+```
+
+Because we use Windows, SSH for example will not work and we need to tweak some Vagrant Configuration Options described here: https://www.vagrantup.com/docs/vagrantfile/winrm_settings.html
 
 
-## Setup
+## Prepare the Windows Box for Ansible Communication
 
 Doku: http://docs.ansible.com/ansible/intro_windows.html#windows-system-prep
 
