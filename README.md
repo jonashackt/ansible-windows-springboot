@@ -35,19 +35,12 @@ Doku: http://docs.ansible.com/ansible/intro_windows.html#windows-system-prep
 
 ### prepare the Windows box
 
-> If you have Windows >= v10, just skip the follwing steps & proceed with Configure remote access for ansible
-
 #### Allow execution of scripts on Powershell:
-```
-get-executionpolicy
-set-executionpolicy remotesigned
-```
-
-If that´s not enough, try the harder one:
 ```
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
+> If you have Windows >= v10, just skip the follwing steps & proceed with Configure remote access for ansible
 #### Upgrade to Powershell 3.0
 
 If __get-host__ shows something < 3.0, you should upgrade with https://github.com/cchurch/ansible/blob/devel/examples/scripts/upgrade_to_ps3.ps1 (this will [reboot your Windows box!](http://serverfault.com/questions/539229/possible-to-upgrade-powershell-2-0-to-3-0-without-a-reboot) )
@@ -57,11 +50,7 @@ If __get-host__ shows something < 3.0, you should upgrade with https://github.co
 #### Configure remote access for ansible
 
 Run
-```
-powershell -nop -c -NoProfile -ExecutionPolicy unrestricted -Command "iex (new-object net.webclient).DownloadString('https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1')"
-```
-
-or if this doesn´t work, download the Script manually (https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1) and run it from Powershell (with Admin rights).
+Download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it from Powershell (with Admin rights).
 
 
 #### Testdrive Ansible connectivity
