@@ -41,16 +41,21 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
 > If you have Windows >= v10, just skip the follwing steps & proceed with Configure remote access for ansible
+
 #### Upgrade to Powershell 3.0
 
 If __get-host__ shows something < 3.0, you should upgrade with https://github.com/cchurch/ansible/blob/devel/examples/scripts/upgrade_to_ps3.ps1 (this will [reboot your Windows box!](http://serverfault.com/questions/539229/possible-to-upgrade-powershell-2-0-to-3-0-without-a-reboot) )
-
-> Start here, if you have Windows >= v10
 
 #### Configure remote access for ansible
 
 Run
 Download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it from Powershell (with Admin rights).
+
+
+#### Testdrive Ansible connectivity
+```
+ansible restexample-windows-dev -i hostsfile -m win_ping
+```
 
 
 ## Choose an Spring Boot app to deploy
@@ -62,10 +67,17 @@ Either way you choose: Be sure to have a working Build in Place, so that you hav
 mvn clean package
 ```
 
-#### Testdrive Ansible connectivity
+
+## Craft a Windows-ready ansible playbook
+
+Let´s run our the playbook restexample-windows.yml:
+
 ```
-ansible yourPlayBookNameWithOutDotYml -i hostsfile -m win_ping
+ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev" --check
 ```
+
+
+
 
 If this brings you something like the following output, your Windows Box is ready for Ansible:
 ```
