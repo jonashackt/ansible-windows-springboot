@@ -5,17 +5,12 @@
     jre_version: "8u111-windows-x64"
     jre_incl_version: "jre-{{jre_version}}"
     jre_zip_name: "{{jre_incl_version}}.zip"
-    jre_path: "{{restexample_path}}\\{{jre_incl_version}}\\bin\\java.exe"
+    jre_path: "C:\\ProgramData\\Oracle\\Java\\javapath\\java.exe"
 
   tasks:
   # Preperation steps
   - name: Create directory C:\spring-boot\restexample, if not there
     win_file: path={{restexample_path}} state=directory
-
-  - name: Get the Java Runtime Environment (JRE) 8 from XYZ
-    win_get_url:
-      url: "http://bla.com/{{jre_zip_name}}"
-      dest: "{{restexample_path}}\\{{jre_zip_name}}"
 
   - name: Copy restexample jar-File to directory C:\spring-boot\restexample
     win_copy:
@@ -34,11 +29,9 @@
     ignore_errors: yes
 
   # Extraction and copying of all necessary files
-  - name: Extracting Java Runtime Environment-Zip-File into C:\spring-boot\restexample\jre-X.Y.Z
-    win_unzip:
-      src: "{{restexample_path}}\\{{jre_zip_name}}"
-      dest: "{{restexample_path}}"
-      rm: true
+  - name: Install Java Runtime Environment (JRE) 8 via chocolatey
+    win_chocolatey:
+      name: jre8
 
   # Service installation (stopping and configuration of Application directory is only done for demontration purposes - for apps that need certain .dlls on the path for example)
   - name: Install restexample Spring Boot app as Windows service (via nssm), if not already there - but remain stopped to configure Application directory

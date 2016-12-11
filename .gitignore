@@ -23,5 +23,8 @@ target
 *.iml
 *.log
 
+# Ansible
+*.retry
+
 # logback
 logback.out.xml

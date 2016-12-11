@@ -104,10 +104,8 @@ mvn clean package
 Let´s run our the playbook restexample-windows.yml:
 
 ```
-ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev"
+ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev"
 ```
-
-
 
 
 
