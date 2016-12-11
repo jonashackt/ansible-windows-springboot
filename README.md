@@ -48,7 +48,6 @@ If __get-host__ shows something < 3.0, you should upgrade with https://github.co
 
 #### Configure remote access for ansible
 
-Run
 Download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it from Powershell (with Admin rights).
 
 
@@ -57,6 +56,37 @@ Download the Script https://github.com/ansible/ansible/blob/devel/examples/scrip
 cd spring-boot-playbook
 ansible restexample-windows-dev -i hostsfile -m win_ping
 ```
+
+If this brings you something like the following output, __your Windows Box is ready for Ansible!__:
+```
+user@macbook:/yourPathHere/ansibleproject$ ansible yourPlayBookNameWithOutDotYml -i hostsfile -m win_ping
+192.168.10.99 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+If you have something like
+```
+127.0.0.1 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "ssl: the specified credentials were rejected by the server", 
+    "unreachable": true
+}
+```
+then your UserName or Password is not correct - and trust me, double or tripple check this before moving to the next point :)
+
+If you get a read time out, your Windows Box is most likely not configured correctly:
+```
+127.0.0.1 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "ssl: HTTPSConnectionPool(host='127.0.0.1', port=55986): Read timed out. (read timeout=30)", 
+    "unreachable": true
+}
+```
+check, if you already successfully ran [Configure remote access for ansible](https://github.com/jonashackt/ansible-windows-springboot#configure-remote-access-for-ansible)
+
+
 
 
 ## Choose an Spring Boot app to deploy
@@ -74,20 +104,11 @@ mvn clean package
 Let´s run our the playbook restexample-windows.yml:
 
 ```
-ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev" --check
+ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev"
 ```
 
 
 
-
-If this brings you something like the following output, your Windows Box is ready for Ansible:
-```
-user@macbook:/yourPathHere/ansibleproject$ ansible yourPlayBookNameWithOutDotYml -i hostsfile -m win_ping
-192.168.10.99 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-```
 
 
 
