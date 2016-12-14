@@ -2,9 +2,6 @@
 - hosts: "{{host}}"
   vars:
     restexample_path: "C:\\spring-boot\\restexample"
-    jre_version: "8u111-windows-x64"
-    jre_incl_version: "jre-{{jre_version}}"
-    jre_zip_name: "{{jre_incl_version}}.zip"
     jre_path: "C:\\ProgramData\\Oracle\\Java\\javapath\\java.exe"
 
   tasks:
