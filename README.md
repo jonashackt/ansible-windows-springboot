@@ -7,8 +7,8 @@ There are times, when you are forced to use a Windows box instead of a smoothly 
 
 You know Windows from ancient times, maybe also from you´re big home gaming machine. But maybe you´re just like me: bringing together Windows and modern software development doesn´t feel as there´s a overlap, right?! Well - after beeing in the situation mentioned above - that doesn´t mean, it´s not possible. It´s the other way around! Because we can use our well known CI Server (like [Jenkins](https://jenkins.io/)) to really manage Windows boxes with the help of our beloved [Ansible](https://www.ansible.com/)! Do you like this idea? Let´s go ahead and try that out!
 
-Ansible nutzt für die Connectivity mit Windows kein ssh, da dies auf Windows nicht verfügbar ist, sondern WinRM (Windows Remote
-Management) - siehe http://www.it-visions.de/glossar/alle/4418/Windows_Remote_Management_WinRM.aspx
+> Isn´t Ansible SSH-only?
+From Version 1.7 on, Ansible also supports managing Windows machines. This is done with native PowerShell remoting (and Windows Remote Management [WinRM](https://technet.microsoft.com/en-us/library/ff700227.aspx)) instead of SSH, as you can [read in the docs](http://docs.ansible.com/ansible/intro_windows.html).
 
 
 ## Prerequisites
