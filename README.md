@@ -59,7 +59,7 @@ ansible restexample-windows-dev -i hostsfile -m win_ping
 
 If this brings you something like the following output, __your Windows Box is ready for Ansible!__:
 ```
-user@macbook:/yourPathHere/ansibleproject$ ansible yourPlayBookNameWithOutDotYml -i hostsfile -m win_ping
+user@macbook:/yourPathHere/ansibleproject$ ansible restexample-windows-dev -i hostsfile -m win_ping
 192.168.10.99 | SUCCESS => {
     "changed": false,
     "ping": "pong"
@@ -101,12 +101,13 @@ mvn clean package
 
 ## Craft a Windows-ready ansible playbook
 
-Let´s run our the playbook restexample-windows.yml:
+I did that step already for you :) So let´s run our the playbook restexample-windows.yml:
 
 ```
 ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev"
 ```
 
+The script does everything needed to run a Spring Boot app on Windows. First we need a folder to run our app in, then we copy the Spring Boot jar-File and need to think about, how we should run our app. After playing around with several possiblilies I discovered a quite elegant way: we run our app as real Windows service. This could be done with the help of [nssm - the Non-Sucking Service Manager](https://nssm.cc/).
 
 
 
