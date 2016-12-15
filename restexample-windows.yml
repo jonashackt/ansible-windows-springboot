@@ -49,3 +49,13 @@
     win_service:
       name: "{{service_name}}"
       state: restarted
+
+  - name: Wait until our Spring Boot app is up & running
+    win_uri:
+      url: "http://localhost:8080/swagger-ui.html"
+      method: GET
+    register: result
+    until: result.status_code == 200  
+    retries: 5
+    delay: 5
+
