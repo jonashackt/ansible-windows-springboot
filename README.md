@@ -8,12 +8,13 @@ There are times, when you are forced to use a Windows box instead of a smoothly 
 You know Windows from ancient times, maybe also from you´re big home gaming machine. But maybe you´re just like me: bringing together Windows and modern software development doesn´t feel as there´s a overlap, right?! Well - after beeing in the situation mentioned above - that doesn´t mean, it´s not possible. It´s the other way around! Because we can use our well known CI Server (like [Jenkins](https://jenkins.io/)) to really manage Windows boxes with the help of our beloved [Ansible](https://www.ansible.com/)! Do you like this idea? Let´s go ahead and try that out!
 
 > Isn´t Ansible SSH-only?
+
 From Version 1.7 on, Ansible also supports managing Windows machines. This is done with native PowerShell remoting (and Windows Remote Management [WinRM](https://technet.microsoft.com/en-us/library/ff700227.aspx)) instead of SSH, as you can [read in the docs](http://docs.ansible.com/ansible/intro_windows.html).
 
 
 ## Prerequisites
 
-We need a Windows box to do show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10 (e.g. for VirtualBox - be sure to have the VM-Provider installed). You should get something like a MSEdge.Win10_RS1.Vagrant.zip - extract it (Mac: with the [Unarchiver](http://wakaba.c3.cx/s/apps/unarchiver.html)) and there you are: The Windows Vagrant box __dev-msedge.box__ is ready :)
+We need a Windows box to show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10 (e.g. for VirtualBox - be sure to have the VM-Provider installed). You should get something like a MSEdge.Win10_RS1.Vagrant.zip - extract it (Mac: with the [Unarchiver](http://wakaba.c3.cx/s/apps/unarchiver.html)) and there you are: The Windows Vagrant box __dev-msedge.box__ is ready :)
 
 Because Microsoft doesn´t seem to ship metadata for the box, add it to Vagrant via:
 
@@ -53,7 +54,6 @@ Download the Script https://github.com/ansible/ansible/blob/devel/examples/scrip
 
 #### Testdrive Ansible connectivity
 ```
-cd spring-boot-playbook
 ansible restexample-windows-dev -i hostsfile -m win_ping
 ```
 
