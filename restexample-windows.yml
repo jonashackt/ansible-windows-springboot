@@ -2,7 +2,7 @@
 - hosts: "{{host}}"
   vars:
     spring_boot_app_path: "C:\\spring-boot\\{{spring_boot_app_name}}"
-    jre_path: "C:\\ProgramData\\Oracle\\Java\\javapath\\java.exe"
+    path_to_java_exe: "C:\\ProgramData\\Oracle\\Java\\javapath\\java.exe"
 
   tasks:
   ###### Preparation steps
@@ -35,7 +35,7 @@
   - name: Install Spring Boot app as Windows service (via nssm), if not already there - but remain stopped to configure Application directory
     win_nssm:
       name: "{{spring_boot_app_name}}"
-      application: "{{jre_path}}"
+      application: "{{path_to_java_exe}}"
       app_parameters:
           "-jar": "{{spring_boot_app_path}}\\{{spring_boot_app_name}}.jar"
       state: stopped
