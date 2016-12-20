@@ -59,9 +59,8 @@ ansible restexample-windows-dev -i hostsfile -m win_ping
 
 If this brings you something like the following output, __your Windows Box is ready for Ansible!__:
 ```
-user@macbook:/yourPathHere/ansibleproject$ ansible restexample-windows-dev -i hostsfile -m win_ping
-192.168.10.99 | SUCCESS => {
-    "changed": false,
+127.0.0.1 | SUCCESS => {
+    "changed": false, 
     "ping": "pong"
 }
 ```
@@ -91,7 +90,7 @@ check, if you already successfully ran [Configure remote access for ansible](htt
 
 ## Choose an Spring Boot app to deploy
 
-This is the easy task - we want to deploy a Spring Boot app. So just fire up one in Minutes e.g. with [Spring Initializr](http://start.spring.io/), choose an existing one you have ready to build or just take the simple project here: https://github.com/jonashackt/restexamples
+This is the easy task - we want to deploy a Spring Boot app. So just fire up one in minutes e.g. with [Spring Initializr](http://start.spring.io/), choose an existing one you have ready to build or just take the simple project here: https://github.com/jonashackt/restexamples
 
 Either way you choose: Be sure to have a working Build in Place, so that you have a runnable Spring Boot jar-File in place (e.g. restexamples-0.0.1-SNAPSHOT.jar). For the example project [restexamples](https://github.com/jonashackt/restexamples) you get this by running:
 ```
@@ -104,7 +103,7 @@ mvn clean package
 I did that step already for you :) So let´s run our the playbook restexample-windows.yml:
 
 ```
-ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar service_name=restexample-springboot host=restexample-windows-dev"
+ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar spring_boot_app_name=restexample-springboot host=restexample-windows-dev"
 ```
 
 The script does everything needed to run a Spring Boot app on Windows. First we need a folder to run our app in, then we copy the Spring Boot jar-File and need to think about, how we should run our app. After playing around with several possiblilies I discovered a quite elegant way: we run our app as real Windows service. This could be done with the help of [nssm - the Non-Sucking Service Manager](https://nssm.cc/).
