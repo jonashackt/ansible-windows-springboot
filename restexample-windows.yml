@@ -27,7 +27,7 @@
 
   - name: Copy Spring Boot app´s jar-File to directory C:\spring-boot\spring_boot_app_name
     win_copy:
-      src: "{{service_jar}}"
+      src: "{{spring_boot_app_jar}}"
       dest: "{{spring_boot_app_path}}\\{{spring_boot_app_name}}.jar"
 
   ####### Service installation

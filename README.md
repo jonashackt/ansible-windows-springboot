@@ -3,9 +3,7 @@ ansible-windows-springboot
 
 ## Example project showing how to provision, deploy and run a Spring Boot app as a Windows Service using Ansible, chocolatey &amp; nssm
 
-There are times, when you are forced to use a Windows box instead of a smoothly running Linux for your Spring Boot app to run on - e.g., if you have to call native libraries like C/C++ programs packaged as exe or dll (you can use [JNA](https://github.com/java-native-access/jna) and [JNAerator](https://github.com/nativelibs4java/JNAerator) for the integration stuff). 
-
-You know Windows from ancient times, maybe also from you´re big home gaming machine. But maybe you´re just like me: bringing together Windows and modern software development doesn´t feel as there´s a overlap, right?! Well - after beeing in the situation mentioned above - that doesn´t mean, it´s not possible. It´s the other way around! Because we can use our well known CI Server (like [Jenkins](https://jenkins.io/)) to really manage Windows boxes with the help of our beloved [Ansible](https://www.ansible.com/)! Do you like this idea? Let´s go ahead and try that out!
+There´s a blog post with more background information here: [to be announced soon](https://blog.codecentric.de/)
 
 > Isn´t Ansible SSH-only?
 
@@ -14,7 +12,7 @@ From Version 1.7 on, Ansible also supports managing Windows machines. This is do
 
 ## Prerequisites
 
-We need a Windows box to show everything. So if you don´t have one spare, go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10 (e.g. for VirtualBox - be sure to have the VM-Provider installed). You should get something like a MSEdge.Win10_RS1.Vagrant.zip - extract it (Mac: with the [Unarchiver](http://wakaba.c3.cx/s/apps/unarchiver.html)) and there you are: The Windows Vagrant box __dev-msedge.box__ is ready :)
+Go to https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/#downloads and download an Vagrant image with Windows 10 (e.g. for VirtualBox - be sure to have the VM-Provider installed). You should get something like a MSEdge.Win10_RS1.Vagrant.zip - extract it (Mac: with the [Unarchiver](http://wakaba.c3.cx/s/apps/unarchiver.html)) and there you are: The Windows Vagrant box __dev-msedge.box__ is ready :)
 
 Because Microsoft doesn´t seem to ship metadata for the box, add it to Vagrant via:
 
@@ -90,7 +88,7 @@ check, if you already successfully ran [Configure remote access for ansible](htt
 
 ## Choose an Spring Boot app to deploy
 
-This is the easy task - we want to deploy a Spring Boot app. So just fire up one in minutes e.g. with [Spring Initializr](http://start.spring.io/), choose an existing one you have ready to build or just take the simple project here: https://github.com/jonashackt/restexamples
+Just take the simple project here: https://github.com/jonashackt/restexamples
 
 Either way you choose: Be sure to have a working Build in Place, so that you have a runnable Spring Boot jar-File in place (e.g. restexamples-0.0.1-SNAPSHOT.jar). For the example project [restexamples](https://github.com/jonashackt/restexamples) you get this by running:
 ```
@@ -103,10 +101,8 @@ mvn clean package
 I did that step already for you :) So let´s run our the playbook restexample-windows.yml:
 
 ```
-ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "service_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar spring_boot_app_name=restexample-springboot host=restexample-windows-dev"
+ansible-playbook -i hostsfile restexample-windows.yml --extra-vars "spring_boot_app_jar=../restexamples/target/restexamples-0.0.1-SNAPSHOT.jar spring_boot_app_name=restexample-springboot host=restexample-windows-dev"
 ```
-
-The script does everything needed to run a Spring Boot app on Windows. First we need a folder to run our app in, then we copy the Spring Boot jar-File and need to think about, how we should run our app. After playing around with several possiblilies I discovered a quite elegant way: we run our app as real Windows service. This could be done with the help of [nssm - the Non-Sucking Service Manager](https://nssm.cc/).
 
 
 
