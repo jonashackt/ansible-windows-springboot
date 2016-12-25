@@ -1,7 +1,7 @@
 ansible-windows-springboot
 ======================================================================================
 [![Build Status](https://travis-ci.org/jonashackt/ansible-windows-springboot.svg?branch=master)](https://travis-ci.org/jonashackt/ansible-windows-springboot)
-[![Ansible Galaxy](http://img.shields.io/badge/galaxy-jonashackt.ansible-windows-springboot-660198.svg)](https://galaxy.ansible.com/jonashackt)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-jonashackt-660198.svg)](https://galaxy.ansible.com/jonashackt)
 
 ## Example ansible playbook - showing how to provision, deploy and run a Spring Boot app as a Windows Service using Ansible, chocolatey &amp; nssm
 
