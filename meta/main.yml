@@ -1,6 +1,6 @@
 galaxy_info:
   author: Jonas Hecht
-  description: Ansible role to deploy Spring Boot apps on windows.
+  description: Ansible playbook to deploy Spring Boot apps on windows.
   # company: your company (optional)
 
   license: license (MIT)
