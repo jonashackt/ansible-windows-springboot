@@ -5,7 +5,7 @@ ansible-windows-springboot
 
 ## Example ansible playbook - showing how to provision, deploy and run a Spring Boot app as a Windows Service using Ansible, chocolatey &amp; nssm
 
-There´s a blog post with more background information here: [to be announced soon](https://blog.codecentric.de/)
+There´s a blog post with more background information here: [Running Spring Boot Apps on Windows with Ansible (codecentric.de)](https://blog.codecentric.de/en/2017/01/ansible-windows-spring-boot/)
 
 > Isn´t Ansible SSH-only?
 
