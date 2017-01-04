@@ -36,12 +36,12 @@ Doku: http://docs.ansible.com/ansible/intro_windows.html#windows-system-prep
 
 ### prepare the Windows box
 
+> If you have Windows >= v10, just skip the follwing steps & proceed with [Configure remote access for ansible](https://github.com/jonashackt/ansible-windows-springboot#configure-remote-access-for-ansible)
+
 #### Allow execution of scripts on Powershell:
 ```
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
-
-> If you have Windows >= v10, just skip the follwing steps & proceed with Configure remote access for ansible
 
 #### Upgrade to Powershell 3.0
 
@@ -49,7 +49,12 @@ If __get-host__ shows something < 3.0, you should upgrade with https://github.co
 
 #### Configure remote access for ansible
 
-Download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it from Powershell (with Admin rights).
+On a Powershell with Admin rights, run:
+```
+iwr https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -UseBasicParsing | iex
+```
+
+(or if that doesn´t work (e.g., if your Powershell Version does not know __iwr__), download the Script https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 and run it manually from Powershell).
 
 
 #### Testdrive Ansible connectivity

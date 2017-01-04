@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
 
   # Configure WinRM Connectivity
   config.winrm.username = "IEUser"
-  config.winrm.password = "Passw0rd"
+  config.winrm.password = "Passw0rd!"
 
   config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
