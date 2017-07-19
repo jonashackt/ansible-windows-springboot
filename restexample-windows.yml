@@ -36,8 +36,7 @@
     win_nssm:
       name: "{{spring_boot_app_name}}"
       application: "{{path_to_java_exe}}"
-      app_parameters_free_form:
-          "-jar": "{{spring_boot_app_path}}\\{{spring_boot_app_name}}.jar"
+      app_parameters_free_form: "-jar {{spring_boot_app_path}}\\{{spring_boot_app_name}}.jar"
       state: stopped
 
   ####### Configure Application path & Fire up the service
