@@ -57,7 +57,7 @@
       url: "http://localhost:8080/swagger-ui.html"
       method: GET
     register: result
-    until: result.status_code == 200  
+    until: result.status_code is defined and result.status_code == 200 
     retries: 5
     delay: 5
 
